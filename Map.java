@@ -25,7 +25,7 @@ public class Map {
     private Square[][] squares;
 
     public Square getSquare(int x, int y) {
-        return Square[y][x];
+        return squares[y][x];
     }
 
     public String getDifficulty() {
