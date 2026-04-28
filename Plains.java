@@ -1,6 +1,9 @@
 
 public class Plains extends Terrain
 {
+    // Random number -- used during map generation to determine the type of terrain for a square
+    private int random_num = 1;
+
     public Plains()
     {
         /**
