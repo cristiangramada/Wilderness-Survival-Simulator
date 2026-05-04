@@ -1,3 +1,5 @@
+package wss;
+
 
 public class Plains extends Terrain
 {

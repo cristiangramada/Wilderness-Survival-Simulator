@@ -1,3 +1,5 @@
+package wss;
+
 /*
 Class: Terrain
 Description: This class represents the type of terrain in a square. It can be used to determine the movement cost for a character or the types of items that can be found in the square.

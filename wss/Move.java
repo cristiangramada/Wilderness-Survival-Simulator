@@ -1,3 +1,5 @@
+package wss;
+
 /*
 Class: Move
 Description: This class represents moves that can be taken by the Player.
@@ -12,10 +14,7 @@ Variables:
 Methods:
     - getNewX(): returns new x-coordinate
     - getNewY(): returns new y-coordinate
-    - execute(): 
-TODO:
-    1. Player.getCurrentSquare, Square.getCoordinates
-    2. execute move + if statement
+    - execute():
 */
 
 public class Move {
@@ -30,7 +29,6 @@ public class Move {
     public Move(Map map, Player player, int newX, int newY) {
         this.map = map;
         this.player = player;
-        //TODO 1
         this.currentX = player.getCurrentSquare().getCoordinates()[0];
         this.currentY = player.getCurrentSquare().getCoordinates()[1];
         this.newX = newX;
@@ -45,10 +43,28 @@ public class Move {
         return newY;
     }
 
+    public boolean isValid() {
+        int destX = currentX + newX;
+        int destY = currentY + newY;
+        return map.isInBounds(destX, destY);
+    }
+
+    /** Target absolute coordinates (after applying delta). Only meaningful if {@link #isValid()}. */
+    public int[] getDestination() {
+        return new int[] { currentX + newX, currentY + newY };
+    }
+
     public void execute() {
-        //TODO 1
-        //TODO 2
+        if (!isValid()) {
+            return;
+        }
         Square newSquare = map.getSquare(currentX + newX, currentY + newY);
-        
-    }    
+        Terrain terrain = newSquare.getTerrainType();
+        if (terrain == null) {
+            return;
+        }
+        int[] costs = terrain.getCosts();
+        player.applyTerrainCosts(costs[0], costs[1], costs[2]);
+        player.moveTo(newSquare);
+    }
 }

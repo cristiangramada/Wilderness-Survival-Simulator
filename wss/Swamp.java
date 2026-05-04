@@ -1,3 +1,5 @@
+package wss;
+
 public class Swamp extends Terrain 
 {
     // Random number -- used during map generation to determine the type of terrain for a square
