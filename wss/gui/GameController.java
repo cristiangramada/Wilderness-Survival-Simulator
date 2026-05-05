@@ -1,6 +1,5 @@
 package wss.gui;
 
-import java.awt.Window;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,14 +17,13 @@ import wss.Trader;
 import wss.Vision;
 
 /**
- * Connects Swing views to the game model: movement resolution, pickups, stalls, victory, autopilot.
+ * Connects Swing views to the game model: timer-driven moves, pickups, stalls, victory.
  */
 public class GameController {
 
     private final Map map;
     private final Player player;
     private boolean allowMoves = true;
-    private final Window dialogParent;
 
     /** Fired once on EDT when player steps onto the rightmost column ({@code width - 1}). */
     private final Runnable onVictory;
@@ -33,19 +31,16 @@ public class GameController {
     /** Fired when food or water hits zero after a step (after loot/traders resolve). */
     private final Runnable onStarvation;
 
-    private final boolean autopilot;
     private final Brain tradeBrain;
-    /** When set, autopilot trader resolution posts one line per stall visit. */
+    /** When set, trader visits append one journal line via {@link TraderAutopilot}. */
     private final Consumer<String> traderJournal;
 
-    public GameController(Map map, Player player, Window dialogParent, Runnable onVictory,
-            Runnable onStarvation, boolean autopilot, Brain tradeBrain, Consumer<String> traderJournal) {
+    public GameController(Map map, Player player, Runnable onVictory,
+            Runnable onStarvation, Brain tradeBrain, Consumer<String> traderJournal) {
         this.map = map;
         this.player = player;
-        this.dialogParent = dialogParent;
         this.onVictory = onVictory;
         this.onStarvation = onStarvation;
-        this.autopilot = autopilot;
         this.tradeBrain = tradeBrain;
         this.traderJournal = traderJournal;
     }
@@ -62,13 +57,9 @@ public class GameController {
         return allowMoves;
     }
 
-    public boolean isAutopilot() {
-        return autopilot;
-    }
-
-    /** Invoked on a timer: vision surveys tiles, brain picks a bearing, then {@link #tryStep} runs like manual play. */
+    /** Invoked on a timer: vision surveys tiles, brain picks a bearing, then {@link #tryStep}. */
     public void stepAutopilot() {
-        if (!allowMoves || !autopilot) {
+        if (!allowMoves) {
             return;
         }
         Vision vision = player.getVision();
@@ -108,7 +99,7 @@ public class GameController {
 
         move.execute();
         player.recordStep(deltaX, deltaY);
-        resolveAfterLanding(dialogParent);
+        resolveAfterLanding();
 
         Square now = player.getCurrentSquare();
         int x = now.getCoordinates()[0];
@@ -128,7 +119,7 @@ public class GameController {
         return true;
     }
 
-    private void resolveAfterLanding(Window owner) {
+    private void resolveAfterLanding() {
         Square sq = player.getCurrentSquare();
 
         List<Item> pile = new ArrayList<>(sq.getItems());
@@ -138,15 +129,10 @@ public class GameController {
         }
 
         Trader merchant = sq.getTrader();
-        if (merchant != null) {
-            if (autopilot && tradeBrain != null) {
-                String line = TraderAutopilot.resolve(player, merchant, tradeBrain);
-                if (traderJournal != null && line != null && !line.isBlank()) {
-                    traderJournal.accept(line);
-                }
-            }
-            else if (owner != null) {
-                TraderDialog.encounter(owner, player, merchant);
+        if (merchant != null && tradeBrain != null) {
+            String line = TraderAutopilot.resolve(player, merchant, tradeBrain);
+            if (traderJournal != null && line != null && !line.isBlank()) {
+                traderJournal.accept(line);
             }
         }
     }

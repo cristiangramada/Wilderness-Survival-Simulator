@@ -3,8 +3,6 @@ package wss.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -17,7 +15,7 @@ import wss.Square;
 import wss.Terrain;
 
 /**
- * Colored terrain grid with painted loot/trader/player accents.
+ * Colored terrain grid with painted loot/trader/player accents (watch-only; stepping is autopilot/timer-driven).
  */
 final class MapPanel extends JPanel {
 
@@ -27,13 +25,9 @@ final class MapPanel extends JPanel {
     private final TerrainTile[][] cells;
     private final int width;
     private final int height;
-    private final Runnable afterStep;
-    private final boolean interactiveMoves;
 
-    MapPanel(GameController controller, Runnable afterStep, boolean interactiveMoves) {
+    MapPanel(GameController controller) {
         this.controller = controller;
-        this.afterStep = afterStep;
-        this.interactiveMoves = interactiveMoves;
         Map map = controller.getMap();
         this.width = map.getWidth();
         this.height = map.getHeight();
@@ -45,16 +39,6 @@ final class MapPanel extends JPanel {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 TerrainTile tile = new TerrainTile(CELL);
-                if (interactiveMoves) {
-                    int cx = x;
-                    int cy = y;
-                    tile.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            onCellClicked(cx, cy);
-                        }
-                    });
-                }
                 cells[y][x] = tile;
                 add(tile);
             }
@@ -114,33 +98,6 @@ final class MapPanel extends JPanel {
             b.append(it.getName());
         }
         return b.toString();
-    }
-
-    void stepFromArrow(int dx, int dy) {
-        if (!interactiveMoves || !controller.movesAllowed()) {
-            return;
-        }
-        if (controller.tryStep(dx, dy)) {
-            afterStep.run();
-            refreshCells();
-        }
-    }
-
-    private void onCellClicked(int x, int y) {
-        if (!interactiveMoves || !controller.movesAllowed()) {
-            return;
-        }
-        Player player = controller.getPlayer();
-        int[] p = player.getCurrentSquare().getCoordinates();
-        int dx = x - p[0];
-        int dy = y - p[1];
-        if (Math.abs(dx) > 1 || Math.abs(dy) > 1 || (dx == 0 && dy == 0)) {
-            return;
-        }
-        if (controller.tryStep(dx, dy)) {
-            afterStep.run();
-            refreshCells();
-        }
     }
 
     private static String terrainLabel(Terrain t) {

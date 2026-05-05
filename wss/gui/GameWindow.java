@@ -76,14 +76,13 @@ public class GameWindow extends JFrame {
         };
 
         GameController controller =
-                new GameController(map, player, GameWindow.this, onVictory, onStarvation, true, brain,
+                new GameController(map, player, onVictory, onStarvation, brain,
                         line -> {
                             trailJournal.append(line + "\n");
                             trailJournal.setCaretPosition(trailJournal.getDocument().getLength());
                         });
         StatsPanel stats = new StatsPanel(StatsPanel.demoLegendTerrain());
-        Runnable refreshHud = () -> stats.applyPlayer(controller.getPlayer());
-        MapPanel mapPanel = new MapPanel(controller, refreshHud, false);
+        MapPanel mapPanel = new MapPanel(controller);
 
         JPanel center = new JPanel(new BorderLayout(10, 0));
         center.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
