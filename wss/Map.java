@@ -11,10 +11,16 @@ Variables:
     - String difficulty: how difficult the game is
     - Square[][] squares: the matrix of Square objects that makes up the map
 Methods:
-    - getSquare(int x, int y): returns the Square at coordinate (x,y)
-    - getDifficulty(): returns the game difficulty
-    - getSize(): returns the size of the map as an array
-    - generateMap(): creates a Square matrix using the width and height
+    - Map(int width, int height, String difficulty): constructor for the Map class. It initializes the width, height, and difficulty of the map, and creates a new Square matrix.
+    - getWidth(): returns the width of the map
+    - getHeight(): returns the height of the map
+    - getSquare(int x, int y): returns the Square object at the specified coordinates
+    - isInBounds(int x, int y): checks if the specified coordinates are within the bounds of the map
+    - getDifficulty(): returns the difficulty of the map
+    - getSize(): returns an array containing the width and height of the map
+    - generateMap(): generates a random map based on the specified difficulty level. It fills the squares matrix with Square objects that have different terrain types based on a random selection from a pool of terrain types.
+    - populateWorldFeatures(Player player): populates the map with items and traders, ensuring that the spawn point is not populated and that loot is not placed on the frontier columns for clearer navigation.
+
 */
 
 import java.util.ArrayList;

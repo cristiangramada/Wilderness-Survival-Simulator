@@ -1,6 +1,20 @@
 package wss;
-
 import java.util.Random;
+/**
+ * Class: Item
+ * Description: This class represents an item that can be found in the world and collected by the player. Each item has a name, a kind (food, water skin, or gold clump), and a value that represents its effect when collected.
+ * Variables:
+ *     - name: A string representing the name of the item.
+ *     - kind: An enum representing the type of item (food, water skin, or gold clump).
+ *     - value: An integer representing the effect magnitude of the item (e.g., how much food or water it provides, or how much gold it is worth).
+ * 
+ * Methods:
+ *     - getName(): Returns the name of the item.
+ *     - getKind(): Returns the kind of the item.
+ *     - getValue(): Returns the value of the item.
+ *     - randomSurfaceFind(Random rnd): A static method that generates a random item based on a random number generator. The method randomly selects an item type and assigns it a value within a certain range based on the type.
+ *  
+ */
 
 /**
  * World pickup: categorized loot with a numeric strength used when the player collects it.

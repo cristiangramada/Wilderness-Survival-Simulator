@@ -8,20 +8,19 @@ Variables:
     - int y: coordinate of the square in the y-axis
     - Terrain terrain_type: the type of terrain in the square
     - ArrayList<Item> items: optional items on this square (empty until bonus/item logic is enabled)
+    - Trader trader: optional trader occupying this square (null if no trader is present)
 
     Methods:
-    - Suare(int x, int y, Terrain terrain_type): constructor for the Square class
+    - Square(int x, int y, Terrain terrain_type): constructor for the Square class
     - getItems(): returns the items in the square
     - getTerrainType(): returns the terrain type of the square
     - setTerrain(String terrain): sets the terrain type of the square based on the string input
     - addItem(Item item): adds an item to the square
     - removeItem(Item item): removes an item from the square
     - generateBonus(): generates bonus items in the square based on the bonus probability
-
-TODO: 
-    1. Assign values to the items in the generateBonus() method
-    2. Determine bonus item limits per square?
-    3. Add the Item object onto the generateBonus method
+    - getTrader(): returns the trader occupying the square, if any
+    - setTrader(Trader trader): sets the trader occupying the square
+    - hasTrader(): checks if there is a trader occupying the square
 */
 
 import java.util.ArrayList;

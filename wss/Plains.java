@@ -1,9 +1,14 @@
 package wss;
-
+/**
+ * Class: Plains
+ * Parent Class: Terrain
+ * Description: This class represents the plains terrain type in the simulation. It has specific movement, water, and food costs associated with the terrain's characterisitics.
+ * Variables:
+ *    - random_num: An integer used during map generation. It is set to 1, which corresponds to the plains terrain type in the map generation algorithm.
+ */
 
 public class Plains extends Terrain
 {
-    // Random number -- used during map generation to determine the type of terrain for a square
     private int random_num = 1;
 
     public Plains()
