@@ -1,3 +1,5 @@
+package wss;
+
 public class MoveNorthWest extends Move{
     
     public MoveNorthWest(Map map, Player player) {

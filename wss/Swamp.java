@@ -1,3 +1,12 @@
+package wss;
+/**
+ * Class: Swamp
+ * Parent Class: Terrain
+ * Description: This class represents the swamp terrain type in the simulation. It has specific movement, water, and food costs associated with the terrain's characterisitics.
+ * Variables:
+ *     - random_num: An integer used during map generation. It is set to 3
+ * 
+ */
 public class Swamp extends Terrain 
 {
     // Random number -- used during map generation to determine the type of terrain for a square

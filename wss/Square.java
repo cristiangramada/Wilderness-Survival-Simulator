@@ -1,84 +1,79 @@
+package wss;
+
 /*
 Class: Square
 Description: This class represent a square space in a map. It connects the program to Item and Terrain classes. 
 Variables:
     - int x: coordinate of the square in the x-axis
     - int y: coordinate of the square in the y-axis
-    - int bonus_prob: the probability of a bonus items being in the square
     - Terrain terrain_type: the type of terrain in the square
-    - ArrayList<Item> items: array list ofthe items that are in the square
-    - Random rand: random number generator used to determine random events in the square, such as bonus items, and the type of bonus item.
+    - ArrayList<Item> items: optional items on this square (empty until bonus/item logic is enabled)
+    - Trader trader: optional trader occupying this square (null if no trader is present)
 
     Methods:
-    - Suare(int x, int y, Terrain terrain_type): constructor for the Square class
+    - Square(int x, int y, Terrain terrain_type): constructor for the Square class
     - getItems(): returns the items in the square
     - getTerrainType(): returns the terrain type of the square
     - setTerrain(String terrain): sets the terrain type of the square based on the string input
     - addItem(Item item): adds an item to the square
     - removeItem(Item item): removes an item from the square
     - generateBonus(): generates bonus items in the square based on the bonus probability
-
-TODO: 
-    1. Assign values to the items in the generateBonus() method
-    2. Determine bonus item limits per square?
-    3. Add the Item object onto the generateBonus method
+    - getTrader(): returns the trader occupying the square, if any
+    - setTrader(Trader trader): sets the trader occupying the square
+    - hasTrader(): checks if there is a trader occupying the square
 */
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Square
 {
     private int x;
     private int y;
-    private int bonus_prob;
     private Terrain terrain_type;
     private ArrayList<Item> items = new ArrayList<>();
-    private Random rand = new Random();
+    /** Optional wandering merchant occupying this stall tile. */
+    private Trader trader;
 
     public Square(int x, int y)
     {
         this.x = x;
         this.y = y;
-        this.bonus_prob = rand.nextInt(100) + 1;
-        if (bonus_prob >= 80)
-        {
-            generateBonus();
-        }
+        /* Default terrain until Map generation assigns one (keeps getters safe for callers). */
+        this.terrain_type = new Plains();
+        /* Bonus items intentionally disabled until item/trader gameplay is modeled. */
+    }
+
+    /**
+     * @return { x, y } in map coordinates matching {@link Map#getSquare(int, int)}.
+     */
+    public int[] getCoordinates()
+    {
+        return new int[] { x, y };
     }
 
     public void generateBonus()
     {
-        // TODO: 1, 2, 3
-        // *might change num of items generated**
-       for(int i = 0; i < 3; i++)
-        {
-            int item_type = rand.nextInt(3) + 1;
-            switch (item_type)
-            {
-                case 1: 
-                    items.add();
-                    break;
-                case 2: 
-                    items.add();
-                    break;
-                case 3:
-                    items.add();
-                    break;
-                default:
-                    break;
-            }
-            
-        }
+        /* Reserved for teams that later wire items / traders onto the map. */
     }
 
     public ArrayList<Item> getItems() 
     {
-        if(items.isEmpty())
-        {
-            System.out.println("There are no bonus items in this square.");
-        }
         return items;
+    }
+
+    public Trader getTrader()
+    {
+        return trader;
+    }
+
+    public void setTrader(Trader trader)
+    {
+        this.trader = trader;
+    }
+
+    public boolean hasTrader()
+    {
+        return trader != null;
     }
 
     public Terrain getTerrainType() 

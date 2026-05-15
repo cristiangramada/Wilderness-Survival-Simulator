@@ -1,6 +1,15 @@
+package wss;
+/**
+ * Class: Forest
+ * Parent Class: Terrain
+ * 
+ * Description: This class represents the forest terrain type in the simulation. It has specific movement, water, and food costs associated with the terrain's characterisitics.
+ * Variables:
+ *     - random_num: An integer used during map generation. It is set to 2, which  corresponds to the forest terrain type in the map generation algorithm.
+ * 
+ */
 public class Forest extends Terrain
 {
-    // Random number -- used during map generation to determine the type of terrain for a square
     private int random_num = 2;
     public Forest()
     {
