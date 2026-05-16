@@ -2,8 +2,8 @@ package wss;
 
 /**
  * One exchange proposal: what the explorer puts on the table and what they expect back from the trader.
- * Stall convention: the merchant only ever asks for <b>gold</b> from you and pays out either <b>water</b>
- * or <b>food</b> (never both in one deal). Traders have unlimited stock; the explorer must have the gold.
+ * Stall convention: the merchant only ever asks for gold from you and pays out either water
+ * or food (never both in one deal). Traders have unlimited stock; the explorer must have the gold.
  */
 public final class TradeOffer {
 
@@ -59,7 +59,7 @@ public final class TradeOffer {
         return new TradeOffer(giveGold, giveWater, giveFood, receiveGold, receiveWater, receiveFood, note);
     }
 
-    /** True if this proposal matches the merchant's standing sheet exactly. */
+    // checks if two offers have identical values on both sides
     public boolean matchesStanding(TradeOffer other) {
         if (other == null) {
             return false;
@@ -69,10 +69,7 @@ public final class TradeOffer {
                 && receiveFood == other.receiveFood;
     }
 
-    /**
-     * True when this follows the stall rules: gold-only payment, no gold from the merchant,
-     * and exactly one of water or food on the receive side is positive.
-     */
+    // stall rule: you only pay gold, merchant never gives gold back, and you get water OR food (not both)
     public boolean conformsToStallRules() {
         if (giveWater != 0 || giveFood != 0 || receiveGold != 0) {
             return false;
@@ -95,16 +92,13 @@ public final class TradeOffer {
         p.addFood(receiveFood);
     }
 
-    /** Rough ledger score for comparing generosity of two offers. */
+    // simple score to compare how generous an offer is
     public int ledgerWeight() {
         return giveGold * 10 + giveWater * 2 + giveFood * 3
                 - (receiveGold * 10 + receiveWater * 2 + receiveFood * 3);
     }
 
-    /**
-     * Merchant softens: lower gold ask and slightly less water <i>or</i> food returned (whichever they sell),
-     * never below zero.
-     */
+    // used when the merchant makes a slightly better counter offer
     public TradeOffer softenAsk(int dropGoldAsk, int dropStockGiven) {
         int ng = Math.max(0, giveGold - dropGoldAsk);
         int rw = receiveWater;
@@ -117,7 +111,7 @@ public final class TradeOffer {
         return new TradeOffer(ng, giveWater, giveFood, receiveGold, rw, rf, "");
     }
 
-    /** Wording {@code "12 gold for 5 food"}. */
+    // returns a readable string like "12 gold for 5 food"
     public String plainStallLine() {
         if (receiveWater > 0) {
             return giveGold + " gold for " + receiveWater + " water";

@@ -1,8 +1,7 @@
 package wss;
 
-/**
- * Configures which {@link Brain} implementation the automaton uses.
- */
+// Enum used in NewGameDialog to select which brain the player runs
+
 public enum BrainKind {
     SURVIVAL,
     GREEDY_EAST;

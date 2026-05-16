@@ -1,8 +1,6 @@
 package wss;
 
-/**
- * Slide scope: extended wedge (two-step verticals and eastern arc).
- */
+// FarSightVision: widest range, includes two steps north/south and a broad eastern arc
 public class FarSightVision extends Vision {
 
     @Override

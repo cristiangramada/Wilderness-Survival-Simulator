@@ -1,28 +1,5 @@
 package wss;
 
-/*
-Class: Map
-Description: This class represents the map in the WSS. It is made of squares from the Square class, and holds
-             objects from the Item and Player classes.
-             The player can set the difficutly and size of the map.
-Variables:
-    - int width: the width of the map
-    - int height: the height of the map
-    - String difficulty: how difficult the game is
-    - Square[][] squares: the matrix of Square objects that makes up the map
-Methods:
-    - Map(int width, int height, String difficulty): constructor for the Map class. It initializes the width, height, and difficulty of the map, and creates a new Square matrix.
-    - getWidth(): returns the width of the map
-    - getHeight(): returns the height of the map
-    - getSquare(int x, int y): returns the Square object at the specified coordinates
-    - isInBounds(int x, int y): checks if the specified coordinates are within the bounds of the map
-    - getDifficulty(): returns the difficulty of the map
-    - getSize(): returns an array containing the width and height of the map
-    - generateMap(): generates a random map based on the specified difficulty level. It fills the squares matrix with Square objects that have different terrain types based on a random selection from a pool of terrain types.
-    - populateWorldFeatures(Player player): populates the map with items and traders, ensuring that the spawn point is not populated and that loot is not placed on the frontier columns for clearer navigation.
-
-*/
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,10 +25,7 @@ public class Map {
         generateMap();
     }
 
-    /**
-     * Sprinkles pickups and installs a couple of traders (mixed personalities, not too many) once spawn is known.
-     * Keeps loot off the frontier columns so the trek reads clearly.
-     */
+    // places random items and two traders on the map after the player's spawn is set
     public void populateWorldFeatures(Player player) {
         if (player == null || player.getCurrentSquare() == null) {
             return;
@@ -92,9 +66,7 @@ public class Map {
         }
     }
 
-    /**
-     * Interior tiles only, skips spawn and goal rims, skips tiles that already spawned loot for cleaner stalls.
-     */
+    // finds valid spots for trader stalls (away from edges, spawn, and existing loot)
     private List<int[]> candidateStallCells(int spawnX, int spawnY) {
         List<int[]> coords = new ArrayList<>();
         for (int y = 1; y < height - 1; y++) {
@@ -111,7 +83,6 @@ public class Map {
         return coords;
     }
 
-    /** Kept for older designs that constructed the backing array externally. */
     public Map(int width, int height, String difficulty, Square[][] squares) {
         this.width = width;
         this.height = height;

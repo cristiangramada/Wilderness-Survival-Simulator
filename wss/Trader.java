@@ -1,12 +1,12 @@
 package wss;
 
 /**
- * A person on a square: negotiation is an alternating sequence of {@link TradeOffer}s until someone
- * accepts or walks away. Subclasses differ in temperament (the explorer cannot tell which logic runs).
+ * Represents a trader on a tile. The player and trader exchange TradeOffer objects
+ * back and forth until one side accepts or gives up.
  */
 public abstract class Trader {
 
-    /** Same face for every subclass — only behavior differs behind the curtain. */
+    /** Same label for every subclass - the player cannot tell which type they are dealing with. */
     public final String stallLabel() {
         return "Merchant at the stall";
     }

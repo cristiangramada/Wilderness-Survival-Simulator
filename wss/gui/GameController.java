@@ -16,24 +16,18 @@ import wss.Square;
 import wss.Trader;
 import wss.Vision;
 
-/**
- * Connects Swing views to the game model: timer-driven moves, pickups, stalls, victory.
- */
+// Handles game logic on each timer tick: moving the player, picking up loot, trading, and end conditions.
 public class GameController {
 
     private final Map map;
     private final Player player;
     private boolean allowMoves = true;
 
-    /** Fired once on EDT when player steps onto the rightmost column ({@code width - 1}). */
-    private final Runnable onVictory;
-
-    /** Fired when food or water hits zero after a step (after loot/traders resolve). */
-    private final Runnable onStarvation;
+    private final Runnable onVictory; // called when player reaches the east edge
+    private final Runnable onStarvation; // called when food or water hits 0
 
     private final Brain tradeBrain;
-    /** When set, trader visits append one journal line via {@link TraderAutopilot}. */
-    private final Consumer<String> traderJournal;
+    private final Consumer<String> traderJournal; // appends trade results to the journal text area
 
     public GameController(Map map, Player player, Runnable onVictory,
             Runnable onStarvation, Brain tradeBrain, Consumer<String> traderJournal) {
@@ -57,7 +51,6 @@ public class GameController {
         return allowMoves;
     }
 
-    /** Invoked on a timer: vision surveys tiles, brain picks a bearing, then {@link #tryStep}. */
     public void stepAutopilot() {
         if (!allowMoves) {
             return;

@@ -16,9 +16,7 @@ import wss.Item;
 import wss.Square;
 import wss.Terrain;
 
-/**
- * One map cell painting terrain tint, loot icons (food / water / gold), a trader stall figure, and the explorer.
- */
+// Renders one cell on the map: terrain color, small icons for loot, a trader marker, and the player dot
 final class TerrainTile extends JPanel {
 
     private Terrain terrain = null;
@@ -97,9 +95,6 @@ final class TerrainTile extends JPanel {
         g2.dispose();
     }
 
-    /**
-     * Simple two-tone rover: hood, cloak, backpack — reads at small sizes without external art files.
-     */
     private static void paintExplorerSilhouette(Graphics2D g2, int w, int h) {
         float cx = w / 2f;
         float baseY = h * 0.62f;
@@ -121,7 +116,6 @@ final class TerrainTile extends JPanel {
         g2.fill(hood);
     }
 
-    /** Striped awning, counter, and merchant bust — reads as a stall without text. */
     private static void paintTraderStall(Graphics2D g2, int w, int h) {
         float cx = w / 2f;
         int awTop = 2;
@@ -156,7 +150,6 @@ final class TerrainTile extends JPanel {
         g2.fill(new RoundRectangle2D.Float(cx - 5f, awBot + 1f, 10f, 7f, 3f, 3f));
     }
 
-    /** Small apple / ration at foot of tile. */
     private static void paintFoodIcon(Graphics2D g2, int cx, int baseY) {
         g2.setColor(new Color(35, 80, 35));
         g2.fillOval(cx - 2, baseY - 10, 4, 3);
@@ -169,7 +162,6 @@ final class TerrainTile extends JPanel {
         g2.fill(new Ellipse2D.Float(cx - 3f, baseY - 7f, 4f, 3f));
     }
 
-    /** Water droplet / skin. */
     private static void paintWaterIcon(Graphics2D g2, int cx, int baseY) {
         Path2D drop = new Path2D.Float();
         drop.moveTo(cx, baseY - 11);
@@ -182,7 +174,6 @@ final class TerrainTile extends JPanel {
         g2.fill(new Ellipse2D.Float(cx - 2f, baseY - 8f, 3f, 3f));
     }
 
-    /** Tiny gold nugget stack when ore lies on the tile. */
     private static void paintGoldIcon(Graphics2D g2, int cx, int baseY) {
         g2.setColor(new Color(210, 165, 40));
         g2.fillOval(cx - 5, baseY - 6, 7, 5);

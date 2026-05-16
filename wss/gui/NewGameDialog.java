@@ -14,9 +14,7 @@ import javax.swing.SpinnerNumberModel;
 import wss.BrainKind;
 import wss.VisionKind;
 
-/**
- * Collects map geometry, difficulty, brain, vision, and autoplay pacing before the GUI map appears.
- */
+// Dialog shown at startup to collect map size, difficulty, brain type, vision type, and step speed
 public final class NewGameDialog {
 
     private NewGameDialog() {

@@ -48,9 +48,7 @@ final class VisionSupport {
         return out;
     }
 
-    /**
-     * One-step options whose (dx,dy) is both a legal king-step and listed in the vision scope (slide offsets).
-     */
+    // returns all tiles the player can legally step to that also fall within the vision offset table
     static List<PerceivedTile> scopedSurvey(Player player, Map map, int[][] visOffsets) {
         List<PerceivedTile> legal = legalSteps(player, map);
         int px = player.getCurrentSquare().getCoordinates()[0];
@@ -215,7 +213,7 @@ final class VisionSupport {
         return out;
     }
 
-    /** If {@code firstBest} false, returns path to second-ranked cell by slide tie rules. */
+    // firstBest=false returns the second-ranked candidate (used when two options tie)
     private static Path pathToBestCandidate(Player player, Map map, int[][] vis,
             List<int[]> candidates, boolean firstBest) {
         if (candidates.isEmpty()) {

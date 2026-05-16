@@ -8,9 +8,7 @@ import wss.SurvivalBrain;
 import wss.TradeOffer;
 import wss.Trader;
 
-/**
- * Simulates a short negotiation for the trail journal runs.
- */
+// Runs the negotiation loop when the player lands on a trader tile and logs the result
 final class TraderAutopilot {
 
     private TraderAutopilot() {
@@ -19,7 +17,7 @@ final class TraderAutopilot {
     static String resolve(Player player, Trader trader, Brain brain) {
         TradeOffer onTable = trader.openingProposal(player);
         StringBuilder log = new StringBuilder();
-        log.append(trader.stallLabel()).append(" — opening: ").append(onTable.plainStallLine());
+        log.append(trader.stallLabel()).append(", opening: ").append(onTable.plainStallLine());
 
         if (maybeInstantAccept(player, brain, onTable, log)) {
             return log.toString();
@@ -35,7 +33,7 @@ final class TraderAutopilot {
             NegotiationOutcome out = trader.respond(player, bid, round, onTable);
             if (out.getKind() == NegotiationOutcome.Kind.ACCEPT) {
                 if (!bid.playerCanPay(player)) {
-                    log.append(" | Merchant nods, but you cannot pay what you bid — deal falls through.");
+                    log.append(" | Merchant nods, but you cannot pay what you bid. Deal falls through.");
                     return log.toString();
                 }
                 bid.apply(player);
@@ -53,7 +51,7 @@ final class TraderAutopilot {
             }
             log.append(" | Counter: ").append(onTable.plainStallLine());
         }
-        log.append(" | Too many rounds — you move on.");
+        log.append(" | Too many rounds. You move on.");
         return log.toString();
     }
 
@@ -73,7 +71,7 @@ final class TraderAutopilot {
         if (brain instanceof GreedyEastBrain) {
             if (onTable.getGiveGold() <= 11 && onTable.ledgerWeight() <= 25) {
                 onTable.apply(player);
-                log.append(" | You snap up their opening — cheap enough.");
+                log.append(" | You take their opening offer, cheap enough.");
                 return true;
             }
         }

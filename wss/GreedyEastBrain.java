@@ -3,7 +3,7 @@ package wss;
 import java.util.List;
 
 /**
- * Pushes east; prefers {@link Vision#easiestPath} through visible terrain, then scored survey steps.
+ * Aggressive brain - tries to move east as fast as possible without worrying too much about resources.
  */
 public class GreedyEastBrain extends Brain {
 

@@ -17,9 +17,7 @@ import wss.Map;
 import wss.Player;
 import wss.Vision;
 
-/**
- * Simulation shell: map grid, stats sidebar, timed brain-driven stepping.
- */
+// Main game window with the map grid, stats panel, and the autoplay timer
 public class GameWindow extends JFrame {
 
     private final Random randomStart = new Random();
@@ -33,7 +31,7 @@ public class GameWindow extends JFrame {
         catch (Exception ignored) {
         }
 
-        setTitle(String.format("WSS — %s · %s · %s",
+        setTitle(String.format("WSS - %s, %s, %s",
                 cfg.brainKind().toString(),
                 cfg.visionKind().toString(),
                 cfg.difficulty()));
@@ -53,14 +51,14 @@ public class GameWindow extends JFrame {
         trailJournal.setEditable(false);
         trailJournal.setLineWrap(true);
         trailJournal.setWrapStyleWord(true);
-        trailJournal.setText("Trail journal — trader stops and haggles appear below.\n");
+        trailJournal.setText("Trail journal - trader stops appear below.\n");
 
         Runnable onVictory = () -> {
             if (expeditionTimer != null) {
                 expeditionTimer.stop();
             }
             JOptionPane.showMessageDialog(GameWindow.this,
-                    "You reached the eastern frontier. Cross-complete!",
+                    "You made it to the eastern edge of the map!",
                     "Goal reached",
                     JOptionPane.INFORMATION_MESSAGE);
         };
@@ -70,7 +68,7 @@ public class GameWindow extends JFrame {
                 expeditionTimer.stop();
             }
             JOptionPane.showMessageDialog(GameWindow.this,
-                    "Food or water has run out — the expedition ends here.",
+                    "Food or water has run out. The expedition ends here.",
                     "Game over",
                     JOptionPane.WARNING_MESSAGE);
         };

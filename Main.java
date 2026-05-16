@@ -5,9 +5,7 @@ import wss.gui.GameConfig;
 import wss.gui.GameWindow;
 import wss.gui.NewGameDialog;
 
-/**
- * Prompts for expedition settings, then opens the simulation window.
- */
+// entry point - shows the config dialog and then launches the game window
 public class Main {
 
     public static void main(String[] args) {

@@ -1,28 +1,5 @@
 package wss;
 
-/*
-Class: Square
-Description: This class represent a square space in a map. It connects the program to Item and Terrain classes. 
-Variables:
-    - int x: coordinate of the square in the x-axis
-    - int y: coordinate of the square in the y-axis
-    - Terrain terrain_type: the type of terrain in the square
-    - ArrayList<Item> items: optional items on this square (empty until bonus/item logic is enabled)
-    - Trader trader: optional trader occupying this square (null if no trader is present)
-
-    Methods:
-    - Square(int x, int y, Terrain terrain_type): constructor for the Square class
-    - getItems(): returns the items in the square
-    - getTerrainType(): returns the terrain type of the square
-    - setTerrain(String terrain): sets the terrain type of the square based on the string input
-    - addItem(Item item): adds an item to the square
-    - removeItem(Item item): removes an item from the square
-    - generateBonus(): generates bonus items in the square based on the bonus probability
-    - getTrader(): returns the trader occupying the square, if any
-    - setTrader(Trader trader): sets the trader occupying the square
-    - hasTrader(): checks if there is a trader occupying the square
-*/
-
 import java.util.ArrayList;
 
 public class Square
@@ -31,21 +8,15 @@ public class Square
     private int y;
     private Terrain terrain_type;
     private ArrayList<Item> items = new ArrayList<>();
-    /** Optional wandering merchant occupying this stall tile. */
     private Trader trader;
 
     public Square(int x, int y)
     {
         this.x = x;
         this.y = y;
-        /* Default terrain until Map generation assigns one (keeps getters safe for callers). */
-        this.terrain_type = new Plains();
-        /* Bonus items intentionally disabled until item/trader gameplay is modeled. */
+        this.terrain_type = new Plains(); // default until map generation sets it
     }
 
-    /**
-     * @return { x, y } in map coordinates matching {@link Map#getSquare(int, int)}.
-     */
     public int[] getCoordinates()
     {
         return new int[] { x, y };
@@ -53,7 +24,7 @@ public class Square
 
     public void generateBonus()
     {
-        /* Reserved for teams that later wire items / traders onto the map. */
+        // not implemented yet
     }
 
     public ArrayList<Item> getItems() 

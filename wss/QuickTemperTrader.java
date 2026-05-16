@@ -1,8 +1,7 @@
 package wss;
 
 /**
- * State diagram: first counter is sharp; after two explorer proposals they fold the awning and refuse
- * further haggling — "too many games".
+ * Trader AI that gets impatient. Only offers one counter before rejecting further attempts.
  */
 public class QuickTemperTrader extends Trader {
 

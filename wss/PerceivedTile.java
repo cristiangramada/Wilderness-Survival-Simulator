@@ -1,8 +1,8 @@
 package wss;
 
-/**
- * One legal single-step option from the player's position, decorated by a {@link Vision} implementation.
- */
+// Holds info about one tile the player could step onto this turn.
+// Vision subclasses fill in the extra fields (risky, doubleStepOutlook, eastCorridorMovementAvg)
+// so the brain can use them when scoring options.
 public final class PerceivedTile {
     public final int dx;
     public final int dy;
@@ -11,16 +11,9 @@ public final class PerceivedTile {
     public final int waterCost;
     public final int foodCost;
     public final int totalCost;
-    /** True when the terrain looks harsh for cautious planners. */
-    public final boolean risky;
-    /**
-     * Keen-Eyed: rough penalty if we kept marching the same bearing for a second step (two hops outlook).
-     */
-    public final int doubleStepOutlook;
-    /**
-     * Far-Sight: mean movement cost along the open corridor straight east from the explorer (lower is easier marching).
-     */
-    public final int eastCorridorMovementAvg;
+    public final boolean risky; // true if CautiousVision considers this tile dangerous
+    public final int doubleStepOutlook; // used by KeenEyed to look two steps ahead
+    public final int eastCorridorMovementAvg; // used by FarSight to check the eastern path difficulty
 
     public PerceivedTile(int dx, int dy, Square destination,
             int movementCost, int waterCost, int foodCost,

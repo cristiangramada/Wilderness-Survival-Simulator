@@ -1,13 +1,4 @@
 package wss;
-/**
- * Class: Mountain
- * Parent Class: Terrain
- * 
- * Description: This class represents the mountain terrain type in the simulation. It has specific movement, water, and food costs associated with the terrain's characterisitics.
- * Variables:
- *   - random_num: An integer used during map generation. It is set to 5, which corresponds to the mountain terrain type in the map generation algorithm.
- * 
- */
 
 public class Mountain extends Terrain
 {

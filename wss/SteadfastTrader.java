@@ -1,8 +1,8 @@
 package wss;
 
 /**
- * State: generous counters up to two softer asks, then shuts the ledger. Accepts when the explorer
- * largely matches the standing terms (balanced, not infinite giveaways).
+ * Trader AI that is more patient. Will counter up to two times with slightly better prices
+ * before giving up if the player's offers are still too far off.
  */
 public class SteadfastTrader extends Trader {
 

@@ -1,30 +1,28 @@
 package wss;
 import java.util.List;
 
-/**
+/*
  * Class: Brain
- * Description: This abstract class represents the decision-making component of a player in the simulation. 
- *              It provides a method to determine the next move based on the player's vision and the current position on the map.
+ * Description: Abstract class for player decision-making.
+ *              makeMove() surveys visible tiles using the player's vision,
+ *              then calls pickStep() to choose where to move next.
+ *
  * Methods:
- *     - makeMove(Player player, Map map): This method uses the player's vision to survey the surroundings and then calls the pickStep method to determine the next move.
- *     - pickStep(Player player, List<PerceivedTile> options): This abstract method is implemented by subclasses to decide the next step based on the perceived tiles. It returns a relative step (dx, dy) or null to stand still if there are no valid choices.
- */
-
-/**
- * Decides the next single step using {@link Vision} procedures and/or the scoped neighbor survey.
+ *     - makeMove(Player player, Map map): gets visible tiles and calls pickStep.
+ *     - pickStep(Player player, List<PerceivedTile> options): picks the actual step.
+ *              Returns (dx, dy) or null to stay put.
+ *
  */
 
 public abstract class Brain {
 
     /**
-     * Slide-style entry: consult vision paths, then fall back to terrain scoring on {@link Vision#survey}.
+     * Calls vision.survey() to get the list of visible options, then pickStep() to choose.
      */
     public int[] makeMove(Player player, Map map) {
         return pickStep(player, player.getVision().survey(player, map));
     }
 
-    /**
-     * @return relative step {@code (dx,dy)} or {@code null} to stand still (no valid choice).
-     */
+    // returns the (dx, dy) step to take, or null if there's nowhere to go
     public abstract int[] pickStep(Player player, List<PerceivedTile> options);
 }

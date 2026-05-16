@@ -1,8 +1,6 @@
 package wss;
 
-/**
- * Slide scope: (1,0), (1,1), (1,-1) relative to the player.
- */
+// FocusedVision: sees directly east, northeast, and southeast
 public class FocusedVision extends Vision {
 
     @Override

@@ -1,8 +1,7 @@
 package wss;
 
-/**
- * Trader's reply to an explorer-proposed {@link TradeOffer}.
- */
+// Result of one round of negotiation between the player and a trader (accept, reject, or counter)
+
 public final class NegotiationOutcome {
 
     public enum Kind {

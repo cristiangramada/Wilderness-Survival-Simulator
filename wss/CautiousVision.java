@@ -1,8 +1,6 @@
 package wss;
 
-/**
- * Slide scope: (0,1), (0,-1), (1,0) — one north, one south, one east.
- */
+// CautiousVision: sees one tile north, one south, and one east
 public class CautiousVision extends Vision {
 
     @Override

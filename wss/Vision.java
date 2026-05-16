@@ -2,22 +2,22 @@ package wss;
 
 import java.util.List;
 
-/**
- * Slide scope: each subclass lists cells visible relative to the player; {@link #survey} limits legal
- * one-step choices to those offsets. Procedures return a {@link Path} (costed sequence of king-steps)
- * toward the best matching visible resource or stall.
+/*
+ * Abstract class for the different vision types.
+ * Each subclass defines which offsets (dx, dy) the player can see.
+ * The survey method uses those offsets to build the list of visible tiles.
  */
 public abstract class Vision {
 
-    /** Focused: east-forward cone (slide example at origin). */
+    // Focused: sees one east, one northeast, one southeast
     public static final int[][] OFFSETS_FOCUSED = { { 1, 0 }, { 1, 1 }, { 1, -1 } };
-    /** Cautious: north, south, east only. */
+    // Cautious: only looks north, south, and east
     public static final int[][] OFFSETS_CAUTIOUS = { { 0, 1 }, { 0, -1 }, { 1, 0 } };
-    /** Keen-Eyed: wider forward arc including two east. */
+    // Keen-Eyed: wider arc, includes two tiles east on the same row
     public static final int[][] OFFSETS_KEEN = {
             { 0, 1 }, { 1, 1 }, { 1, 0 }, { 2, 0 }, { 0, -1 }, { 1, -1 }
     };
-    /** Far-Sight: extended wedge including two-step verticals and eastern flank. */
+    // Far-Sight: largest footprint, two steps in several directions
     public static final int[][] OFFSETS_FAR = {
             { 0, 1 }, { 0, 2 }, { 1, 2 }, { 1, 1 }, { 1, 0 }, { 0, -1 }, { 0, -2 },
             { 1, -1 }, { 1, -2 }, { 2, 0 }, { 2, 1 }, { 2, -1 }

@@ -14,9 +14,7 @@ import wss.Player;
 import wss.Square;
 import wss.Terrain;
 
-/**
- * Colored terrain grid with painted loot/trader/player accents (watch-only; stepping is autopilot/timer-driven).
- */
+// Panel that draws the terrain grid and marks where the player, loot, and traders are
 final class MapPanel extends JPanel {
 
     private static final int CELL = 42;

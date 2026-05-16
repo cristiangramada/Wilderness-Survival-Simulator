@@ -1,8 +1,7 @@
 package wss;
 
-/**
- * Configures which {@link Vision} implementation surveys neighboring tiles.
- */
+// Enum used in NewGameDialog to select which vision type the player uses
+
 public enum VisionKind {
     FOCUSED,
     CAUTIOUS,

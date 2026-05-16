@@ -3,7 +3,7 @@ package wss;
 import java.util.List;
 
 /**
- * Minimizes immediate harm; prefers vision paths to water/food when low, then terrain survey.
+ * Cautious brain - prioritizes finding food and water when running low before moving east.
  */
 public class SurvivalBrain extends Brain {
 
@@ -65,11 +65,8 @@ public class SurvivalBrain extends Brain {
                 score -= 45;
             }
             score -= t.doubleStepOutlook;
-            /* Far-Sight: rough eastern corridor — treat high averages as future strain. */
             score -= t.eastCorridorMovementAvg * 3;
-            /* Prefer advancing east toward the goal — stops ping-ponging back onto cheap plains. */
             score += t.dx * 55;
-            /* Strong penalty for undoing the previous step (oscillation loop). */
             if ((lastDx != 0 || lastDy != 0) && t.dx == -lastDx && t.dy == -lastDy) {
                 score -= 160;
             }

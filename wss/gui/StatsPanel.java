@@ -16,9 +16,7 @@ import javax.swing.border.EmptyBorder;
 import wss.Player;
 import wss.Terrain;
 
-/**
- * Sidebar with resource counters and terrain map key ({@link TerrainColors}).
- */
+// Right-side panel showing health/water/food/gold and the terrain color legend
 final class StatsPanel extends JPanel {
 
     private final JLabel healthValue = styledValue();
@@ -91,7 +89,6 @@ final class StatsPanel extends JPanel {
         return panel;
     }
 
-    /** Build a deterministic legend ordering for demo maps. */
     static Map<String, Terrain> demoLegendTerrain() {
         Map<String, Terrain> map = new LinkedHashMap<>();
         map.put("Plains", new wss.Plains());

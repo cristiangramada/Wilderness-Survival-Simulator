@@ -3,9 +3,7 @@ package wss.gui;
 import wss.BrainKind;
 import wss.VisionKind;
 
-/**
- * Expedition settings gathered before the simulation window opens.
- */
+// Holds the settings chosen in the new game dialog
 public record GameConfig(
         int width,
         int height,

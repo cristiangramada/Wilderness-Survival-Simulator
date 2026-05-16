@@ -1,7 +1,7 @@
 package wss;
 
 /**
- * Tracks the player's position on the map and survival resources.
+ * Stores the player's stats (health, food, water, gold), position, brain, and vision.
  */
 public class Player {
     private final Map map;
@@ -87,9 +87,7 @@ public class Player {
         return gold;
     }
 
-    /**
-     * Apply costs from terrain when entering a square: movement, water, food (in that order per {@link Terrain#getCosts()}).
-     */
+    // deduct movement/water/food costs when the player steps onto a new tile
     public void applyTerrainCosts(int movementCost, int waterCost, int foodCost) {
         health = clampHealth(health - movementCost);
         water = clampFoodWater(water - waterCost);
@@ -121,7 +119,6 @@ public class Player {
         health = clampHealth(health + points);
     }
 
-    /** Apply a floor pickup rolled during map generation or trading. */
     public void pickup(Item item) {
         switch (item.getKind()) {
             case FOOD:
