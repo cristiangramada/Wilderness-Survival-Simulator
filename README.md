@@ -139,13 +139,3 @@ WSS_Project/
     ├── MapPanel.java      Colored terrain grid
     └── NewGameDialog.java Startup configuration
 ```
-
----
-
-## Contributors
-
-| Name | GitHub |
-|------|--------|
-| Cristian Gramada | [@cristiangramada](https://github.com/cristiangramada) |
-| Julianna | [@juliarias20](https://github.com/juliarias20) |
-| Natalie Tran | — |
