@@ -4,17 +4,14 @@
 
 [![Java](https://img.shields.io/badge/Java-17%2B-orange?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Swing](https://img.shields.io/badge/GUI-Java%20Swing-blue)](https://docs.oracle.com/javase/tutorial/uiswing/)
-[![License](https://img.shields.io/badge/License-Academic-lightgrey)](#)
-
-**[View on GitHub](https://github.com/cristiangramada/WSS_Project)** · University group project (Object-Oriented Design)
 
 ---
 
 ## Overview
 
-WSS is a turn-based wilderness expedition game with a **Java Swing** front end. You configure map size, difficulty, AI brain, and vision type at startup; the explorer then runs on autopilot, step by step, until it reaches the eastern edge of the map or runs out of food and water.
+WSS is a turn-based wilderness expedition game built with **Java Swing**. Configure map size, difficulty, AI brain, and vision type at startup; the explorer then runs on autopilot, step by step, until it reaches the eastern edge of the map or runs out of food and water.
 
-The project emphasizes **object-oriented design**: terrain types, movement, vision, trading, and decision-making are modeled as separate, composable classes rather than a single monolithic game loop.
+The codebase is modular by design — terrain, movement, vision, trading, and decision-making are separate, composable pieces instead of one tangled game loop.
 
 ### Highlights
 
@@ -115,9 +112,9 @@ Main
  └── Item          Loot (food, water, gold)
 ```
 
-**Design patterns in practice**
+**Under the hood**
 
-- **Strategy** — `Brain` and `Vision` are interchangeable policies attached to `Player`
+- **Strategy pattern** — `Brain` and `Vision` are interchangeable policies attached to `Player`
 - **Polymorphism** — terrain and trader subtypes share behavior through base classes
 - **Separation of concerns** — `GameController` handles game logic; `GameWindow` / `MapPanel` handle rendering
 
@@ -145,26 +142,10 @@ WSS_Project/
 
 ---
 
-## Team
+## Contributors
 
-Group project — **Object-Oriented Design**:
-
-| Contributor | GitHub |
-|-------------|--------|
+| Name | GitHub |
+|------|--------|
 | Cristian Gramada | [@cristiangramada](https://github.com/cristiangramada) |
 | Julianna | [@juliarias20](https://github.com/juliarias20) |
 | Natalie Tran | — |
-
----
-
-## Portfolio blurb
-
-Short copy you can reuse on [cristiangramada.com](https://cristiangramada.com):
-
-> **Wilderness Survival Simulator** — Java/Swing desktop game exploring OOP design through composable AI strategies, procedural terrain, and trader negotiation. Configure brain and vision modules, then watch an autonomous explorer cross a survival map toward the eastern goal.
-
----
-
-## License
-
-Academic coursework project. All rights reserved by the authors unless otherwise noted.
