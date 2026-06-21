@@ -1,6 +1,6 @@
 package wss;
 
-public class MoveNorthEast extends Move{
+public class MoveNorthEast extends Move {
     
     public MoveNorthEast(Map map, Player player) {
         /**

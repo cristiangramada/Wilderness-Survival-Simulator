@@ -11,6 +11,7 @@ import wss.Terrain;
 
 final class TerrainColors {
 
+    /** Map panel fill colors for each terrain type. */
     private TerrainColors() {
     }
 
